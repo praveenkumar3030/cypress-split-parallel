@@ -29,14 +29,14 @@ install:
 test:
   image: cypress/base:16.14.2-slim
   stage: test
+  script:
+    # print CI environment variables
+    # https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
+    - npx @bahmutov/print-env CI_
+    - npx cypress run -e split=true,TAGS="$VG" --browser chrome --spec "cypress/e2e/features/00_common/*.feature";
   parallel:
     matrix:
       - VG: ['GB','US']
         containers: [1, 2, 3, 4]
   variables:
     REPORT_SUFFIX: "$VG"
-  script:
-    # print CI environment variables
-    # https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
-    - npx @bahmutov/print-env CI_
-    - npx cypress run -e split=true,TAGS="$VG" --browser chrome --spec "cypress/e2e/features/00_common/*.feature";
