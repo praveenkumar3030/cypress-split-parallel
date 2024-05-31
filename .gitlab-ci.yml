@@ -34,7 +34,7 @@ test:
     # https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
     - npx @bahmutov/print-env CI_
     - npx cypress run -e TAGS="$VG",is_ci=true,split=true --browser chrome --spec "cypress/e2e/features/00_common/*.feature";
-    echo "CYPRESS_SPEC_PATTERN=$SPEC_PATTERN npx cypress run -e TAGS=\"$VG\",is_ci=true,split=true --browser chrome --spec \"$SPEC\";"
+    - echo "CYPRESS_SPEC_PATTERN=$SPEC_PATTERN npx cypress run -e TAGS=\"$VG\",is_ci=true,split=true --browser chrome --spec \"$SPEC\";"
 
   parallel:
     matrix:
